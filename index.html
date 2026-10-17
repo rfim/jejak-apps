@@ -266,6 +266,56 @@ input, select { font: inherit; font-weight: 400; font-size: 14px; color: var(--i
 footer.site { border-top: 1px solid var(--line); padding-block: 24px 40px; color: var(--muted); font-size: 13px; }
 footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
+/* ---------- matematika ---------- */
+.mathgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.mcard { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.mcard h3 { font-size: 19px; font-weight: 750; font-stretch: 108%; }
+.mcard p, .mcard li { color: var(--muted); font-size: 14px; }
+.mcard ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.formula { background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px; padding: 16px 12px; overflow-x: auto; color: var(--ink); }
+.formula math { font-size: 1.3em; color: var(--ink); }
+.vars { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13.5px; color: var(--muted); }
+.vars math { color: var(--ink); }
+.rules-t { width: 100%; min-width: 0; font-size: 13.5px; }
+.rules-t td, .rules-t th { padding: 7px 10px; }
+.worked { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.worked > header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.worked h3 { font-size: 17px; font-weight: 750; }
+.chipset { display: flex; gap: 6px; flex-wrap: wrap; }
+.chipset button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
+.chipset button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.worked table td.num, .worked table th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.worked tfoot td { font-weight: 600; border-top: 2px solid var(--ink); border-bottom: 0; }
+.worked tbody tr { cursor: default; }
+.calc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.calc > div { padding: 14px 16px; display: grid; gap: 4px; min-width: 0; }
+.calc > div + div { border-left: 1px solid var(--line); }
+.calc code { font-family: var(--mono); font-size: 13px; color: var(--ink); overflow-wrap: anywhere; }
+.calc b { font-family: var(--display); font-size: 30px; font-weight: 800; font-stretch: 112%; line-height: 1; font-variant-numeric: tabular-nums; }
+.calc .cv b { color: var(--claim); } .calc .ev b { color: var(--accent); }
+.consent { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.consent > div { padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.consent > div + div { border-left: 1px solid var(--line); }
+.consent h3 { font-size: 17px; font-weight: 750; }
+.consent select { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; width: 100%; }
+.srcs { display: grid; gap: 8px; }
+.srcs label { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 400; color: var(--ink); cursor: pointer; }
+.srcs label span:last-child { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.srcs input { width: 18px; height: 18px; accent-color: var(--accent); }
+.result-line { display: flex; gap: 18px; flex-wrap: wrap; align-items: baseline; }
+.result-line b { font-family: var(--display); font-size: 30px; font-weight: 800; font-stretch: 112%; color: var(--accent); font-variant-numeric: tabular-nums; }
+.limits { margin-top: 16px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; }
+.limits .label { color: var(--partial); padding-top: 3px; }
+.limits ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; font-size: 14px; }
+.limits b { color: var(--ink); font-weight: 600; }
+@media (max-width: 860px) {
+  .mathgrid, .consent { grid-template-columns: minmax(0, 1fr); }
+  .consent > div + div { border-left: 0; border-top: 1px solid var(--line); }
+  .calc { grid-template-columns: minmax(0, 1fr); }
+  .calc > div + div { border-left: 0; border-top: 1px solid var(--line); }
+  .limits { grid-template-columns: minmax(0, 1fr); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cand, .cand .bar i, .graph .edge, .graph .sk, .graph .ev { transition: none; }
 }
@@ -283,6 +333,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
       <a href="#ruang">Ruang analisis</a>
       <a href="#cara">Cara kerja</a>
       <a href="#sinyal">Sinyal</a>
+      <a href="#matematika">Matematika</a>
       <a href="#izin">Izin &amp; etika</a>
       <a href="app/">Aplikasi</a>
     </nav>
@@ -369,7 +420,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
         <div class="step"><span class="label">Langkah 1 · Urai</span><h3>Pecah CV jadi klaim</h3><p>Agen membaca CV dan menulis setiap klaim sebagai baris terstruktur: keahlian, level 0–5, dan kalimat asal. <code>"Ahli Laravel 5 thn"</code> menjadi klaim level 5 yang menunggu bukti.</p></div>
         <div class="step"><span class="label">Langkah 2 · Cari</span><h3>Kumpulkan sinyal berizin</h3><p>Kandidat memilih sumber yang boleh dibaca: repositori kode, portofolio, penerbit sertifikat, dan atasan yang bersedia mengisi referensi terstruktur.</p></div>
         <div class="step"><span class="label">Langkah 3 · Uji</span><h3>Uji yang belum terbukti</h3><p>Klaim tanpa bukti mendapat uji kerja singkat yang dibuat agen sesuai posisi, misalnya memperbaiki race condition pada stok dalam 45 menit.</p></div>
-        <div class="step"><span class="label">Langkah 4 · Nilai</span><h3>Peringkat dari bukti</h3><p>Skor dihitung dari level terbukti × bobot keahlian × kepercayaan sumber. Kandidat melihat dossier yang sama dan bisa menyanggah.</p></div>
+        <div class="step"><span class="label">Langkah 4 · Nilai</span><h3>Peringkat dari bukti</h3><p>Skor dihitung dari level terbukti × bobot keahlian. Kepercayaan sumber menentukan berapa banyak level yang tersisa jika kandidat mencabut izin. Rumusnya ada di bagian <a href="#matematika">Matematika</a>.</p></div>
       </div>
     </div>
   </section>
@@ -381,6 +432,113 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
         <p>Setiap sumber punya bobot kepercayaan. Klaim CV tetap dihitung, tapi paling rendah: ia memberi tahu agen di mana harus mencari, bukan apa yang benar.</p>
       </div>
       <div class="signals" id="signals"></div>
+    </div>
+  </section>
+
+  <section class="block" id="matematika">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Matematika di baliknya</h2>
+        <p>Tidak ada kotak hitam. Ini rumus yang benar-benar dijalankan halaman ini dan aplikasi mobile, dengan contoh yang bisa kamu periksa angka per angka.</p>
+      </div>
+
+      <div class="mathgrid">
+        <div class="mcard">
+          <span class="label">Rumus 1 · Skor</span>
+          <h3>Rata-rata berbobot dari level keahlian</h3>
+          <div class="formula">
+            <math display="block"><mi>S</mi><mo>=</mo><mtext>bulat</mtext><mo>(</mo><mn>100</mn><mo>·</mo><mfrac><mrow><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>w</mi><mi>k</mi></msub><mo>·</mo><msub><mi>L</mi><mi>k</mi></msub></mrow><mrow><mn>5</mn><mo>·</mo><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>w</mi><mi>k</mi></msub></mrow></mfrac><mo>)</mo></math>
+          </div>
+          <div class="vars">
+            <math><msub><mi>w</mi><mi>k</mi></msub></math><span>bobot keahlian <i>k</i> untuk posisi ini: Laravel 3, MySQL 2, Konkurensi 2, REST API 2, Testing 1, Inggris 1. Jumlahnya 11.</span>
+            <math><msub><mi>L</mi><mi>k</mi></msub></math><span>level keahlian dari 0 sampai 5. Diisi level di CV untuk <b>skor CV</b>, atau level terbukti untuk <b>skor bukti</b>.</span>
+            <math><mn>5</mn></math><span>level tertinggi, supaya skor jatuh di 0 sampai 100.</span>
+          </div>
+          <p>Rumus yang sama dipakai dua kali. Yang berubah hanya sumber angka <math><msub><mi>L</mi><mi>k</mi></msub></math>: klaim AI kandidat, atau bukti yang ditemukan AI Jejak.</p>
+        </div>
+
+        <div class="mcard">
+          <span class="label">Rumus 2 · Status</span>
+          <h3>Membandingkan klaim <math><mi>c</mi></math> dengan bukti <math><mi>e</mi></math></h3>
+          <div class="scroll"><table class="rules-t">
+            <thead><tr><th>Syarat</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><math><mi>c</mi><mo>=</mo><mn>0</mn></math> dan <math><mi>e</mi><mo>&gt;</mo><mn>0</mn></math></td><td><span class="pill st-hidden">Tersembunyi</span></td></tr>
+              <tr><td><math><mi>e</mi><mo>=</mo><mn>0</mn></math> dan <math><mi>c</mi><mo>&gt;</mo><mn>0</mn></math></td><td><span class="pill st-none">Tanpa bukti</span></td></tr>
+              <tr><td><math><mi>e</mi><mo>≥</mo><mi>c</mi></math></td><td><span class="pill st-ok">Terverifikasi</span></td></tr>
+              <tr><td><math><mi>c</mi><mo>−</mo><mi>e</mi><mo>≥</mo><mn>2</mn></math></td><td><span class="pill st-over">Dilebih-lebihkan</span></td></tr>
+              <tr><td>selain itu (<math><mi>c</mi><mo>−</mo><mi>e</mi><mo>=</mo><mn>1</mn></math>)</td><td><span class="pill st-partial">Sebagian</span></td></tr>
+            </tbody>
+          </table></div>
+          <p>Syarat diperiksa dari atas ke bawah; yang pertama cocok yang dipakai.</p>
+        </div>
+
+        <div class="mcard">
+          <span class="label">Rumus 3 · Izin dan kepercayaan sumber</span>
+          <h3>Level yang tersisa saat izin dicabut</h3>
+          <div class="formula">
+            <math display="block"><msubsup><mi>L</mi><mi>k</mi><mo>′</mo></msubsup><mo>=</mo><mtext>bulat</mtext><mo>(</mo><msub><mi>L</mi><mi>k</mi></msub><mo>·</mo><mfrac><mrow><munder><mo>∑</mo><mrow><mi>s</mi><mo>∈</mo><msub><mi>A</mi><mi>k</mi></msub></mrow></munder><msub><mi>t</mi><mi>s</mi></msub></mrow><mrow><munder><mo>∑</mo><mrow><mi>s</mi><mo>∈</mo><msub><mi>E</mi><mi>k</mi></msub></mrow></munder><msub><mi>t</mi><mi>s</mi></msub></mrow></mfrac><mo>)</mo></math>
+          </div>
+          <div class="vars">
+            <math><msub><mi>E</mi><mi>k</mi></msub></math><span>semua sumber yang membuktikan keahlian <i>k</i>.</span>
+            <math><msub><mi>A</mi><mi>k</mi></msub></math><span>sumber yang masih diizinkan kandidat.</span>
+            <math><msub><mi>t</mi><mi>s</mi></msub></math><span>kepercayaan sumber dari bagian Sinyal: uji kerja 1,0, riwayat kerja resmi 0,9, kode publik 0,8, referensi 0,6, sertifikasi 0,5, wawancara 0,5.</span>
+          </div>
+          <p>Mencabut sumber yang kuat menurunkan level lebih banyak daripada mencabut sumber yang lemah. Coba di bawah.</p>
+        </div>
+
+        <div class="mcard">
+          <span class="label">Rumus 4 · Selisih dan peringkat</span>
+          <h3>Seberapa jauh CV dari kenyataan</h3>
+          <div class="formula">
+            <math display="block"><mi mathvariant="normal">Δ</mi><mo>=</mo><msub><mi>S</mi><mtext>CV</mtext></msub><mo>−</mo><msub><mi>S</mi><mtext>bukti</mtext></msub><mspace width="2em"/><mo>▲</mo><mo>=</mo><msub><mi>r</mi><mtext>CV</mtext></msub><mo>−</mo><msub><mi>r</mi><mtext>bukti</mtext></msub></math>
+          </div>
+          <ul>
+            <li><b>Δ positif</b>: CV menjanjikan lebih dari yang terbukti. Di dossier, Δ di atas 15 diberi warna merah.</li>
+            <li><b>Δ negatif</b>: kandidat lebih baik dari CV-nya, sering karena ada keahlian tersembunyi.</li>
+            <li><b>▲</b> adalah perubahan peringkat. <math><mi>r</mi></math> adalah posisi dalam urutan dari skor tertinggi.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="worked">
+        <header><h3>Contoh perhitungan: <span id="mwName"></span></h3><div class="chipset" id="mwChips" role="group" aria-label="Pilih kandidat"></div></header>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Keahlian</th><th class="num">Bobot w</th><th class="num">Level CV</th><th class="num">w × L (CV)</th><th class="num">Level bukti</th><th class="num">w × L (bukti)</th><th>Status</th></tr></thead>
+            <tbody id="mwBody"></tbody>
+            <tfoot id="mwFoot"></tfoot>
+          </table>
+        </div>
+        <div class="calc" id="mwCalc"></div>
+      </div>
+
+      <div class="consent">
+        <div>
+          <span class="label">Coba Rumus 3</span>
+          <h3>Cabut izin satu sumber</h3>
+          <label for="mcSkill" style="display:grid;gap:6px;font-size:13px;font-weight:600">Keahlian milik <span id="mcName"></span>
+            <select id="mcSkill"></select>
+          </label>
+          <div class="srcs" id="mcSrcs"></div>
+        </div>
+        <div>
+          <span class="label">Hasil</span>
+          <div class="formula" id="mcFormula"></div>
+          <div class="result-line"><span>Level terbukti <b id="mcLevel"></b></span><span>Skor bukti <b id="mcScore"></b></span></div>
+          <p class="hint" id="mcNote" style="color:var(--muted);font-size:13.5px"></p>
+        </div>
+      </div>
+
+      <div class="limits">
+        <span class="label">Batas model</span>
+        <ul>
+          <li><b>Level terbukti ditetapkan dari bukti</b> dengan rubrik per keahlian (di demo ini diisi untuk empat contoh), lalu Rumus 3 menyesuaikannya jika izin dicabut.</li>
+          <li><b>Bobot dipilih manual.</b> Rencana pilot: kalibrasi bobot keahlian dan kepercayaan sumber terhadap kinerja tiga bulan pertama, dengan regresi sederhana.</li>
+          <li><b>Kemiripan CV dengan iklan lowongan tidak masuk rumus.</b> Di aplikasi mobile, sinyal itu hanya membuat agen memeriksa lebih ketat. Menulis CV dengan AI tidak mengurangi skor.</li>
+          <li><b>Keadilan diperiksa, bukan diasumsikan.</b> Rencana pilot: bandingkan tingkat lolos antarkelompok dengan aturan empat-perlima (four-fifths rule) sebelum dipakai untuk keputusan.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -747,6 +905,69 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
     <div class="sig${cv ? ' cv' : ''}"><h3>${t}</h3>
       <div class="w"><span class="bar"><i style="width:${w * 100}%"></i></span><span class="num">${w.toFixed(1)}</span></div>
       <p>${d}</p></div>`).join('');
+
+  /* matematika */
+  const TRUST = { U: 1.0, G: 0.9, K: 0.8, R: 0.6, S: 0.5, W: 0.5 };
+  const fmt = (x, d = 1) => x.toLocaleString('id-ID', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const mstate = { cand: 'raka', skill: null, off: new Set() };
+  function renderWorked() {
+    const c = CANDS.find(x => x.id === mstate.cand);
+    $('mwName').textContent = c.name;
+    $('mwChips').innerHTML = CANDS.map(x => `<button type="button" data-id="${x.id}" aria-pressed="${x.id === c.id}">${esc(x.name.split(' ')[0])}</button>`).join('');
+    $('mwChips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { mstate.cand = b.dataset.id; mstate.skill = null; mstate.off.clear(); renderWorked(); }));
+    let sc = 0, se = 0;
+    $('mwBody').innerHTML = SKILLS.map(s => {
+      const cl = c.claim[s.id], e = c.evidence[s.id];
+      sc += s.w * cl; se += s.w * e;
+      const [st, lbl] = status(cl, e);
+      return `<tr><td style="font-weight:600">${esc(s.name)}</td><td class="num">${s.w}</td><td class="num">${cl}</td><td class="num">${s.w * cl}</td><td class="num">${e}</td><td class="num">${s.w * e}</td><td><span class="pill st-${st}">${lbl}</span></td></tr>`;
+    }).join('');
+    $('mwFoot').innerHTML = `<tr><td>Jumlah</td><td class="num">${SW}</td><td></td><td class="num">${sc}</td><td></td><td class="num">${se}</td><td></td></tr>`;
+    const rc = 100 * sc / (5 * SW), re = 100 * se / (5 * SW);
+    const d = Math.round(rc) - Math.round(re);
+    $('mwCalc').innerHTML = `
+      <div class="cv"><span class="label">Skor CV</span><code>100 × ${sc} / (5 × ${SW}) = ${fmt(rc, 2)}</code><b>${Math.round(rc)}</b></div>
+      <div class="ev"><span class="label">Skor bukti</span><code>100 × ${se} / (5 × ${SW}) = ${fmt(re, 2)}</code><b>${Math.round(re)}</b></div>
+      <div><span class="label">Selisih Δ dan peringkat</span><code>${Math.round(rc)} − ${Math.round(re)} = ${d < 0 ? '−' : ''}${Math.abs(d)}; peringkat #${RANK_CV[c.id]} → #${RANK_EV[c.id]}</code><b style="color:var(${d > 15 ? '--over' : d < 0 ? '--hidden' : '--ink'})">${d > 0 ? '+' : d < 0 ? '−' : ''}${Math.abs(d)}</b></div>`;
+    renderConsent();
+  }
+  function renderConsent() {
+    const c = CANDS.find(x => x.id === mstate.cand);
+    $('mcName').textContent = c.name;
+    const skills = SKILLS.filter(s => c.ev.some(e => e.k.includes(s.id)));
+    if (!mstate.skill || !skills.some(s => s.id === mstate.skill)) {
+      // start on the skill with the most sources, where the effect is easiest to see
+      mstate.skill = skills.slice().sort((a, b) => new Set(c.ev.filter(e => e.k.includes(b.id)).map(e => e.s)).size - new Set(c.ev.filter(e => e.k.includes(a.id)).map(e => e.s)).size)[0].id;
+    }
+    $('mcSkill').innerHTML = skills.map(s => `<option value="${s.id}" ${s.id === mstate.skill ? 'selected' : ''}>${esc(s.name)}</option>`).join('');
+    const k = mstate.skill, L = c.evidence[k];
+    const linked = c.ev.filter(e => e.k.includes(k));
+    $('mcSrcs').innerHTML = linked.map((e, i) => `<label for="mcs${i}"><input type="checkbox" id="mcs${i}" data-i="${i}" ${mstate.off.has(c.ev.indexOf(e)) ? '' : 'checked'}><span>${esc(e.t)}</span><span>${esc(SRC[e.s])} · t = ${fmt(TRUST[e.s])}</span></label>`).join('');
+    $('mcSrcs').querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => {
+      const idx = c.ev.indexOf(linked[+inp.dataset.i]);
+      if (inp.checked) mstate.off.delete(idx); else mstate.off.add(idx);
+      renderConsent();
+    }));
+    const on = c.ev.map((e, i) => !mstate.off.has(i));
+    const lvl = (sk) => {
+      const ln = c.ev.map((e, i) => [e, i]).filter(([e]) => e.k.includes(sk));
+      const all = ln.reduce((a, [e]) => a + TRUST[e.s], 0), act = ln.filter(([, i]) => on[i]).reduce((a, [e]) => a + TRUST[e.s], 0);
+      return all ? Math.round(c.evidence[sk] * act / all) : 0;
+    };
+    const all = linked.reduce((a, e) => a + TRUST[e.s], 0);
+    const act = linked.filter(e => on[c.ev.indexOf(e)]).reduce((a, e) => a + TRUST[e.s], 0);
+    const nl = lvl(k);
+    const newScore = Math.round(SKILLS.reduce((a, s) => a + s.w * lvl(s.id) / 5, 0) / SW * 100);
+    $('mcFormula').innerHTML = `<math display="block"><msubsup><mi>L</mi><mi>k</mi><mo>′</mo></msubsup><mo>=</mo><mtext>bulat</mtext><mo>(</mo><mn>${L}</mn><mo>·</mo><mfrac><mn>${fmt(act)}</mn><mn>${fmt(all)}</mn></mfrac><mo>)</mo><mo>=</mo><mtext>bulat</mtext><mo>(</mo><mn>${fmt(L * act / all, 2)}</mn><mo>)</mo><mo>=</mo><mn>${nl}</mn></math>`;
+    $('mcLevel').textContent = `${nl}/5`;
+    $('mcScore').textContent = newScore;
+    const base = c.es;
+    $('mcNote').textContent = newScore === base
+      ? `Semua sumber diizinkan: skor bukti ${base}. Hapus centang untuk melihat efeknya.`
+      : `Skor bukti turun dari ${base} ke ${newScore}. Sumber lain yang masih diizinkan menahan sisa levelnya.`;
+  }
+  $('mcSkill').addEventListener('change', () => { mstate.skill = $('mcSkill').value; renderConsent(); });
+  renderWorked();
 
   /* pilot form */
   $('pilotForm').addEventListener('submit', (ev) => {
