@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jejak</title>
+<meta name="description" content="Jejak: peringkat kandidat berdasarkan bukti, bukan klaim CV.">
+<meta name="theme-color" content="#eceff3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1117" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Jejak">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="login" id="login" hidden>
+  <form class="login-card" id="loginForm" novalidate>
+    <img src="icons/icon-192.png" alt="" width="64" height="64" class="login-icon">
+    <h1>Masuk ke Jejak</h1>
+    <p class="hint">Peringkat kandidat berdasarkan bukti, bukan klaim CV.</p>
+    <label class="f" for="loginUser">Nama pengguna
+      <input id="loginUser" name="username" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text" required>
+    </label>
+    <label class="f" for="loginPass">Kata sandi
+      <input id="loginPass" name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <p class="login-error" id="loginError" role="alert" hidden></p>
+    <button class="btn" type="submit" id="loginBtn">Masuk</button>
+    <a class="link center" href="../?web=1">Buka versi web</a>
+  </form>
+</div>
+<div class="shell" id="shell" hidden>
+  <header class="appbar">
+    <div class="appbar-row">
+      <span class="eyebrow" id="eyebrow">Backend Engineer, Laravel</span>
+      <span class="appbar-actions">
+        <button type="button" class="install" id="installBtn" hidden>Pasang</button>
+        <button type="button" class="logout" id="logoutBtn">Keluar</button>
+      </span>
+    </div>
+    <h1 id="screenTitle">Peringkat</h1>
+  </header>
+
+  <main id="main">
+    <section class="screen" data-screen="peringkat" aria-labelledby="screenTitle">
+      <div class="ios-hint card" id="iosHint" hidden>
+        <p><b>Pasang Jejak di iPhone:</b> ketuk tombol Bagikan di Safari, lalu pilih <b>Tambah ke Layar Utama</b>.</p>
+        <button type="button" class="link" id="iosHintClose">Tutup</button>
+      </div>
+      <div class="seg" role="group" aria-label="Mode penilaian">
+        <button type="button" data-mode="cv" aria-pressed="false">Skor CV</button>
+        <button type="button" data-mode="es" aria-pressed="true">Skor bukti</button>
+      </div>
+      <p class="hint" id="rankHint"></p>
+      <div class="rank" id="rank"></div>
+      <p class="foot">Data contoh. Semua kandidat dan angka dibuat untuk demo.</p>
+    </section>
+
+    <section class="screen" data-screen="dossier" hidden>
+      <div class="chips" id="dossierChips" role="tablist" aria-label="Pilih kandidat"></div>
+      <div id="dossier"></div>
+    </section>
+
+    <section class="screen" data-screen="bukti" hidden>
+      <div class="chips" id="srcChips" aria-label="Saring sumber"></div>
+      <ul class="feed" id="feed"></ul>
+    </section>
+
+    <section class="screen" data-screen="izin" hidden>
+      <div class="chips" id="izinChips" role="tablist" aria-label="Lihat sebagai kandidat"></div>
+      <div id="izin"></div>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Menu utama">
+    <a href="#peringkat" data-tab="peringkat">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h4V10H4zM10 18h4V5h-4zM16 18h4v-6h-4z"/></svg><span>Peringkat</span></a>
+    <a href="#dossier" data-tab="dossier">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke-dasharray="3 2.2"/><circle cx="9.5" cy="14.5" r="2.2"/><circle cx="14.5" cy="9.5" r="2.2"/><path d="M9.5 14.5l5-5" fill="none"/></svg><span>Dossier</span></a>
+    <a href="#bukti" data-tab="bukti">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9" fill="none"/></svg><span>Bukti</span></a>
+    <a href="#izin" data-tab="izin">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none"/><path d="M9 12l2 2 4-4" fill="none"/></svg><span>Izin</span></a>
+  </nav>
+
+  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+    <div class="grab" aria-hidden="true"></div>
+    <div class="sheet-head"><h2 id="sheetTitle"></h2><button type="button" class="link" id="sheetClose">Tutup</button></div>
+    <div id="sheetBody"></div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
