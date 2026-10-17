@@ -1,5 +1,5 @@
 // App-shell cache so Jejak opens offline once installed. Bump VERSION when any file changes.
-const VERSION = 'jejak-v1';
+const VERSION = 'jejak-v2';
 const SHELL = [
   './', 'index.html', 'app.css', 'app.js', 'data.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',

@@ -11,15 +11,28 @@ window.JEJAK = (() => {
 
   const SRC = {
     U: { name: 'Uji kerja', trust: 1.0, reads: 'Hasil uji 45 menit yang kamu kerjakan di Jejak.' },
+    G: { name: 'Riwayat kerja resmi', trust: 0.9, reads: 'Masa kerja dari catatan iuran resmi (BPJS Ketenagakerjaan), dibagikan lewat ID digital seperti pola Myinfo di Singapura.' },
     K: { name: 'Kode publik', trust: 0.8, reads: 'Repositori yang kamu pilih, hanya commit milikmu.' },
     R: { name: 'Referensi terstruktur', trust: 0.6, reads: 'Jawaban atasan yang kontaknya kamu berikan.' },
     S: { name: 'Sertifikasi', trust: 0.5, reads: 'Status sertifikat, dicek langsung ke penerbit.' },
     W: { name: 'Wawancara teknis', trust: 0.5, reads: 'Transkrip wawancara dan nilai rubrik.' },
   };
 
+  const STAGES = [
+    { id: 'baru', name: 'Baru' },
+    { id: 'uji', name: 'Uji kerja' },
+    { id: 'wawancara', name: 'Wawancara' },
+    { id: 'penawaran', name: 'Penawaran' },
+  ];
+
+  // cvAi: signals that the CV was tuned to the job ad (by a person or by an AI writer).
+  // They never lower a score; they tell the agent how hard to check.
   const CANDS = [
     {
-      id: 'raka', name: 'Raka Pratama', tag: '6 thn pengalaman · 14 kata kunci cocok',
+      id: 'raka', name: 'Raka Pratama', hue: 18, stage: 'uji', applied: '3 hari lalu',
+      tag: '6 thn pengalaman · 14 kata kunci cocok',
+      years: { cv: 6, verified: 3.5 },
+      cvAi: { adMatch: 91, keywords: 14, phrases: ['results-driven', 'end-to-end ownership', 'scalable architecture'] },
       claim:    { laravel: 5, mysql: 5, lock: 4, api: 5, test: 4, eng: 4 },
       evidence: { laravel: 3, mysql: 2, lock: 1, api: 3, test: 1, eng: 3 },
       ev: [
@@ -28,10 +41,13 @@ window.JEJAK = (() => {
         { s: 'S', t: 'Sertifikat "Laravel Expert"', d: 'Penerbit tidak bisa diverifikasi; tidak ada ujian terawasi.', k: ['laravel'], str: 'Lemah', when: '3 hari lalu' },
         { s: 'W', t: 'Wawancara teknis 30 menit', d: 'Menjelaskan indeks komposit dengan keliru; komunikasi lancar.', k: ['mysql', 'eng'], str: 'Sedang', when: 'Kemarin' },
       ],
-      agent: 'Klaim konkurensi gugur di uji kerja. Jangan lanjutkan untuk posisi yang menyentuh stok atau uang tanpa uji ulang.',
+      agent: 'Klaim konkurensi gugur di uji kerja dan masa kerja resmi 3,5 tahun, bukan 6. Jangan lanjutkan untuk posisi yang menyentuh stok atau uang tanpa uji ulang.',
     },
     {
-      id: 'sinta', name: 'Sinta Wulandari', tag: '3 thn pengalaman · 7 kata kunci cocok',
+      id: 'sinta', name: 'Sinta Wulandari', hue: 200, stage: 'wawancara', applied: '5 hari lalu',
+      tag: '3 thn pengalaman · 7 kata kunci cocok',
+      years: { cv: 3, verified: 3.2 },
+      cvAi: { adMatch: 38, keywords: 7, phrases: [] },
       claim:    { laravel: 3, mysql: 3, lock: 0, api: 3, test: 2, eng: 3 },
       evidence: { laravel: 4, mysql: 4, lock: 4, api: 4, test: 4, eng: 3 },
       ev: [
@@ -43,7 +59,10 @@ window.JEJAK = (() => {
       agent: 'Keahlian konkurensi tidak ada di CV tapi terbukti kuat. Kandidat ini kemungkinan besar tersaring keluar oleh filter kata kunci.',
     },
     {
-      id: 'dimas', name: 'Dimas Hakim', tag: '4 thn pengalaman · 10 kata kunci cocok',
+      id: 'dimas', name: 'Dimas Hakim', hue: 150, stage: 'wawancara', applied: '4 hari lalu',
+      tag: '4 thn pengalaman · 10 kata kunci cocok',
+      years: { cv: 4, verified: 4 },
+      cvAi: { adMatch: 62, keywords: 10, phrases: ['team player'] },
       claim:    { laravel: 4, mysql: 4, lock: 3, api: 4, test: 3, eng: 2 },
       evidence: { laravel: 4, mysql: 3, lock: 3, api: 4, test: 2, eng: 4 },
       ev: [
@@ -54,7 +73,10 @@ window.JEJAK = (() => {
       agent: 'CV merendahkan bahasa Inggrisnya. Cocok untuk integrasi dengan vendor asing; minta uji testing singkat.',
     },
     {
-      id: 'ayu', name: 'Ayu Lestari', tag: '5 thn pengalaman · 11 kata kunci cocok',
+      id: 'ayu', name: 'Ayu Lestari', hue: 330, stage: 'uji', applied: '2 hari lalu',
+      tag: '5 thn pengalaman · 11 kata kunci cocok',
+      years: { cv: 5, verified: 4.5 },
+      cvAi: { adMatch: 74, keywords: 11, phrases: ['passionate', 'fast-paced environment'] },
       claim:    { laravel: 4, mysql: 3, lock: 2, api: 5, test: 3, eng: 4 },
       evidence: { laravel: 3, mysql: 3, lock: 0, api: 4, test: 3, eng: 4 },
       ev: [
@@ -66,5 +88,25 @@ window.JEJAK = (() => {
     },
   ];
 
-  return { SKILLS, SRC, CANDS, ROLE: 'Backend Engineer, Laravel' };
+  const NOTIFS = [
+    { id: 'n1', t: '2 jam lalu', m: 'Sinta menyelesaikan uji kerja. Lolos, termasuk kasus bersamaan.', go: 'kandidat/sinta' },
+    { id: 'n2', t: '5 jam lalu', m: 'Masa kerja Raka terverifikasi: 3,5 tahun, bukan 6 tahun seperti di CV.', go: 'kandidat/raka' },
+    { id: 'n3', t: 'Kemarin', m: 'Ayu belum punya bukti konkurensi. Agen menyarankan uji kerja.', go: 'kandidat/ayu' },
+  ];
+
+  const ACTIVITY = [
+    { t: '09.12', m: 'Membaca transkrip wawancara Sinta dan menilai dengan rubrik.', k: 'W' },
+    { t: '08.40', m: 'Mencocokkan masa kerja Raka dengan catatan resmi: selisih 2,5 tahun.', k: 'G' },
+    { t: '08.05', m: 'Memeriksa 3 repo Raka: 2 fork tutorial tanpa commit asli.', k: 'K' },
+    { t: 'Kmrn', m: 'Membuat uji kerja "potong stok bersamaan" untuk 4 pelamar.', k: 'U' },
+  ];
+  // Events the agent "finds" when the recruiter pulls to refresh.
+  const LIVE = [
+    { m: 'Menghubungi penerbit sertifikat Ayu: terverifikasi, ujian terawasi.', k: 'S' },
+    { m: 'Menemukan 41 kalimat CV Raka yang identik dengan iklan lowongan.', k: 'K' },
+    { m: 'Referensi Dimas mengonfirmasi 2 tahun kerja dengan klien Singapura.', k: 'R' },
+    { m: 'Menjalankan ulang uji kerja Raka dengan 50 request bersamaan: gagal.', k: 'U' },
+  ];
+
+  return { SKILLS, SRC, STAGES, CANDS, NOTIFS, ACTIVITY, LIVE, ROLE: 'Backend Engineer, Laravel' };
 })();
