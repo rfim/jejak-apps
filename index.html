@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Jejak, AI vs AI: AI mereka menulis CV, AI kami memeriksanya dengan bukti yang diizinkan kandidat.">
+<meta name="description" content="Jejak: jasa screening developer. AI mereka menulis CV, kami memeriksanya dengan bukti yang diizinkan kandidat.">
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Jejak Skill Intelligence</title>
 <script>
@@ -266,6 +266,26 @@ input, select { font: inherit; font-weight: 400; font-size: 14px; color: var(--i
 footer.site { border-top: 1px solid var(--line); padding-block: 24px 40px; color: var(--muted); font-size: 13px; }
 footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
+/* ---------- demo note, harga ---------- */
+.demo-note { background: color-mix(in srgb, var(--partial) 12%, var(--bg)); border-bottom: 1px solid color-mix(in srgb, var(--partial) 30%, var(--line)); font-size: 13px; color: var(--ink); }
+.demo-note .wrap { padding-block: 8px; }
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.plan b { font-family: var(--display); font-size: 30px; font-weight: 800; font-stretch: 110%; line-height: 1.05; }
+.plan b small { font-family: var(--body); font-size: 14px; font-weight: 500; color: var(--muted); }
+.plan p { color: var(--muted); font-size: 14px; }
+.plan.pilotp { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.plan.pilotp p, .plan.pilotp .label { color: color-mix(in srgb, var(--bg) 75%, transparent); }
+.units-t { min-width: 560px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.units-t th.num, .units-t td.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.units-t tbody tr { cursor: default; }
+.units-t tfoot td { font-weight: 700; border-top: 2px solid var(--ink); border-bottom: 0; }
+.hv-note { margin-top: 16px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+.hv-note .label { padding-top: 3px; }
+.hv-note p { color: var(--muted); font-size: 14px; }
+.hv-note b { color: var(--ink); }
+@media (max-width: 860px) { .plans, .hv-note { grid-template-columns: minmax(0, 1fr); } }
+
 /* ---------- matematika ---------- */
 .mathgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .mcard { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: grid; gap: 12px; align-content: start; min-width: 0; }
@@ -332,22 +352,23 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
     <nav aria-label="Navigasi">
       <a href="#ruang">Ruang analisis</a>
       <a href="#cara">Cara kerja</a>
-      <a href="#sinyal">Sinyal</a>
       <a href="#matematika">Matematika</a>
-      <a href="#izin">Izin &amp; etika</a>
+      <a href="#harga">Harga</a>
+      <a href="#data">Data &amp; AI</a>
       <a href="app/">Aplikasi</a>
     </nav>
     <a class="btn" href="#pilot">Minta pilot</a>
   </div>
 </header>
+<div class="demo-note"><div class="wrap"><b>Demo konsep.</b> Kandidat dan angka di halaman ini adalah contoh. Penilaian di demo ini belum dijalankan oleh AI.</div></div>
 
 <main>
   <section class="hero">
     <div class="wrap">
       <div>
-        <span class="label">AI vs AI · skill intelligence untuk tim rekrutmen</span>
-        <h1 style="margin-top:16px"><span class="strike">AI mereka menulis CV.</span><br><em>AI kami</em> memeriksanya.</h1>
-        <p class="lede">Pelamar kini menulis CV dengan AI, disetel persis ke iklan lowongan. Filter kata kunci kalah sebelum mulai. Di CV, siapa yang kamu tampilkan lebih penting daripada siapa kamu sebenarnya. Jejak membalik urutan itu: agen kami memecah CV menjadi klaim, mencari <b>bukti yang diizinkan kandidat</b>, menguji yang belum terbukti, lalu memberi peringkat berdasarkan apa yang bisa ditunjukkan, bukan apa yang ditulis.</p>
+        <span class="label">Jasa screening developer · AI vs AI</span>
+        <h1 style="margin-top:16px"><span class="strike">AI mereka menulis CV.</span><br><em>Kami</em> memeriksanya.</h1>
+        <p class="lede">Pelamar kini menulis CV dengan AI, disetel persis ke iklan lowongan, dan repo GitHub bisa dibuat dalam hitungan menit. Filter kata kunci kalah sebelum mulai. Jejak menyaring semua CV, <b>menguji yang lolos secara langsung</b>, lalu memberi peringkat dari apa yang bisa ditunjukkan kandidat, bukan apa yang ditulis. AI hanya alat bantu kami; setiap hasil dicek reviewer.</p>
         <div class="cta">
           <a class="btn" href="#ruang">Buka ruang analisis</a>
           <a class="btn ghost" href="#izin">Bukan pengintaian. Baca aturannya</a>
@@ -413,14 +434,14 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
   <section class="block" id="cara">
     <div class="wrap">
       <div class="block-head">
-        <h2>Dari klaim ke bukti, dalam empat langkah</h2>
-        <p>Masalahnya bukan kurang data, tapi data yang salah: CV ditulis untuk lolos filter kata kunci. Jejak memperlakukan setiap baris CV sebagai hipotesis yang perlu diuji, lalu hanya menghitung yang lolos uji.</p>
+        <h2>Saringan tiga tahap: yang mahal hanya untuk yang lolos</h2>
+        <p>Tidak semua CV perlu diuji mahal. Semua CV disaring murah, yang lolos diuji singkat, dan hanya shortlist yang mendapat dossier lengkap. Setiap tahap dicek reviewer.</p>
       </div>
       <div class="steps">
-        <div class="step"><span class="label">Langkah 1 · Urai</span><h3>Pecah CV jadi klaim</h3><p>Agen membaca CV dan menulis setiap klaim sebagai baris terstruktur: keahlian, level 0–5, dan kalimat asal. <code>"Ahli Laravel 5 thn"</code> menjadi klaim level 5 yang menunggu bukti.</p></div>
-        <div class="step"><span class="label">Langkah 2 · Cari</span><h3>Kumpulkan sinyal berizin</h3><p>Kandidat memilih sumber yang boleh dibaca: repositori kode, portofolio, penerbit sertifikat, dan atasan yang bersedia mengisi referensi terstruktur.</p></div>
-        <div class="step"><span class="label">Langkah 3 · Uji</span><h3>Uji yang belum terbukti</h3><p>Klaim tanpa bukti mendapat uji kerja singkat yang dibuat agen sesuai posisi, misalnya memperbaiki race condition pada stok dalam 45 menit.</p></div>
-        <div class="step"><span class="label">Langkah 4 · Nilai</span><h3>Peringkat dari bukti</h3><p>Skor dihitung dari level terbukti × bobot keahlian. Kepercayaan sumber menentukan berapa banyak level yang tersisa jika kandidat mencabut izin. Rumusnya ada di bagian <a href="#matematika">Matematika</a>.</p></div>
+        <div class="step"><span class="label">Tahap 1 · semua CV</span><h3>Triase CV</h3><p>Setiap klaim di CV dipetakan per keahlian dan level 0–5. CV yang disalin dari iklan ditandai. Semua diberi peringkat dalam 24 jam.</p></div>
+        <div class="step"><span class="label">Tahap 2 · top 20%</span><h3>Tes singkat 20 menit</h3><p>Dikerjakan online dan dinilai dengan rubrik yang sama untuk semua kandidat.</p></div>
+        <div class="step"><span class="label">Tahap 3 · shortlist</span><h3>Dossier lengkap</h3><p>Uji live coding 60 menit di codebase asing. <b>Boleh pakai AI</b>: yang dinilai cara memakainya dan apakah kandidat menangkap jawaban AI yang salah. Lalu wawancara <i>explain-your-code</i> 20 menit dan cek masa kerja serta ijazah atas izin kandidat.</p></div>
+        <div class="step"><span class="label">Hasil</span><h3>Anda memutuskan</h3><p>Skor dihitung dengan rumus terbuka (lihat <a href="#matematika">Matematika</a>), dicek reviewer. Keputusan tetap di tangan Anda.</p></div>
       </div>
     </div>
   </section>
@@ -428,8 +449,8 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
   <section class="block" id="sinyal">
     <div class="wrap">
       <div class="block-head">
-        <h2>Tidak semua bukti sama kuat</h2>
-        <p>Setiap sumber punya bobot kepercayaan. Klaim CV tetap dihitung, tapi paling rendah: ia memberi tahu agen di mana harus mencari, bukan apa yang benar.</p>
+        <h2>Di era AI, artefak murah. Proses tidak.</h2>
+        <p>CV, portofolio, dan repo GitHub kini bisa dibuat AI dalam menit, jadi bobotnya rendah. Bobot tertinggi untuk bukti yang prosesnya terlihat langsung atau diterbitkan pihak ketiga.</p>
       </div>
       <div class="signals" id="signals"></div>
     </div>
@@ -454,7 +475,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
             <math><msub><mi>L</mi><mi>k</mi></msub></math><span>level keahlian dari 0 sampai 5. Diisi level di CV untuk <b>skor CV</b>, atau level terbukti untuk <b>skor bukti</b>.</span>
             <math><mn>5</mn></math><span>level tertinggi, supaya skor jatuh di 0 sampai 100.</span>
           </div>
-          <p>Rumus yang sama dipakai dua kali. Yang berubah hanya sumber angka <math><msub><mi>L</mi><mi>k</mi></msub></math>: klaim AI kandidat, atau bukti yang ditemukan AI Jejak.</p>
+          <p>Rumus yang sama dipakai dua kali. Yang berubah hanya sumber angka <math><msub><mi>L</mi><mi>k</mi></msub></math>: klaim yang ditulis di CV, atau bukti yang terkumpul.</p>
         </div>
 
         <div class="mcard">
@@ -482,7 +503,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
           <div class="vars">
             <math><msub><mi>E</mi><mi>k</mi></msub></math><span>semua sumber yang membuktikan keahlian <i>k</i>.</span>
             <math><msub><mi>A</mi><mi>k</mi></msub></math><span>sumber yang masih diizinkan kandidat.</span>
-            <math><msub><mi>t</mi><mi>s</mi></msub></math><span>kepercayaan sumber dari bagian Sinyal: uji kerja 1,0, riwayat kerja resmi 0,9, kode publik 0,8, referensi 0,6, sertifikasi 0,5, wawancara 0,5.</span>
+            <math><msub><mi>t</mi><mi>s</mi></msub></math><span>kepercayaan sumber dari bagian Sinyal: uji live coding 1,0, riwayat kerja resmi 0,9, wawancara explain-your-code 0,7, referensi 0,6, sertifikasi 0,5, kode publik 0,3.</span>
           </div>
           <p>Mencabut sumber yang kuat menurunkan level lebih banyak daripada mencabut sumber yang lemah. Coba di bawah.</p>
         </div>
@@ -533,11 +554,99 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
       <div class="limits">
         <span class="label">Batas model</span>
         <ul>
-          <li><b>Level terbukti ditetapkan dari bukti</b> dengan rubrik per keahlian (di demo ini diisi untuk empat contoh), lalu Rumus 3 menyesuaikannya jika izin dicabut.</li>
+          <li><b>Ini masih demo.</b> Level terbukti di sini diisi manual untuk empat contoh. Di layanan nyata, level ditetapkan reviewer dengan rubrik per keahlian, lalu Rumus 3 menyesuaikannya jika izin dicabut.</li>
           <li><b>Bobot dipilih manual.</b> Rencana pilot: kalibrasi bobot keahlian dan kepercayaan sumber terhadap kinerja tiga bulan pertama, dengan regresi sederhana.</li>
-          <li><b>Kemiripan CV dengan iklan lowongan tidak masuk rumus.</b> Di aplikasi mobile, sinyal itu hanya membuat agen memeriksa lebih ketat. Menulis CV dengan AI tidak mengurangi skor.</li>
+          <li><b>Kemiripan CV dengan iklan lowongan tidak masuk rumus.</b> Di aplikasi mobile, sinyal itu hanya membuat reviewer memeriksa lebih ketat. Menulis CV dengan AI tidak mengurangi skor.</li>
           <li><b>Keadilan diperiksa, bukan diasumsikan.</b> Rencana pilot: bandingkan tingkat lolos antarkelompok dengan aturan empat-perlima (four-fifths rule) sebelum dipakai untuk keputusan.</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="harga">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Harga: bayar sesuai tahap</h2>
+        <p>Rp150rb hanya untuk shortlist yang mendapat dossier lengkap, bukan untuk setiap pelamar. Untuk 300 pelamar satu lowongan developer, totalnya sekitar Rp3,15 juta, atau Rp10rb per pelamar.</p>
+      </div>
+      <div class="plans">
+        <div class="plan"><span class="label">UMKM</span><b>Rp2,5 jt <small>/ bulan</small></b><p>500 triase CV · 50 tes singkat · 5 dossier lengkap</p></div>
+        <div class="plan"><span class="label">Growth · ±100 CV/hari</span><b>Rp9,9 jt <small>/ bulan</small></b><p>3.000 triase CV · 300 tes singkat · 30 dossier lengkap</p></div>
+        <div class="plan pilotp"><span class="label">Untuk 5 perusahaan pertama</span><b>Pilot gratis</b><p>Satu lowongan: 100 triase CV, 10 tes singkat, 3 dossier.</p></div>
+      </div>
+      <div class="scroll" style="margin-top:16px">
+        <table class="units-t">
+          <thead><tr><th>Tahap</th><th>Siapa</th><th class="num">Harga satuan</th><th class="num">Contoh 300 pelamar</th></tr></thead>
+          <tbody>
+            <tr><td>Triase CV</td><td>Semua pelamar</td><td class="num">Rp3.000</td><td class="num">300 × Rp3rb = Rp900rb</td></tr>
+            <tr><td>Tes singkat 20 menit</td><td>Top 20%</td><td class="num">Rp30.000</td><td class="num">60 × Rp30rb = Rp1,8 jt</td></tr>
+            <tr><td>Dossier lengkap</td><td>Shortlist</td><td class="num">Rp150.000</td><td class="num">3 × Rp150rb = Rp450rb</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="3">Total satu lowongan</td><td class="num">±Rp3,15 jt</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="hv-note">
+        <span class="label">Posisi volume tinggi</span>
+        <p>Kasir, staf toko, dan posisi sejenis: <b>Rp500rb per lowongan</b> untuk hingga 300 pelamar, triase dan tes singkat otomatis, tanpa dossier. Sebagai pembanding, agency rekrutmen umumnya mengenakan 10–20% gaji tahun pertama untuk satu rekrutan. Harga belum termasuk pajak.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="data">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Data &amp; AI: pertanyaan yang pasti ditanyakan</h2>
+        <p>Perusahaan tidak perlu punya infrastruktur AI sendiri. Kami yang menjalankan alatnya; Anda hanya menerima hasilnya. Ini cara kami menjaga data dan berapa biayanya.</p>
+      </div>
+      <div class="mathgrid">
+        <div class="mcard">
+          <span class="label">Apakah data bocor?</span>
+          <h3>Identitas dibuang sebelum diproses AI</h3>
+          <ul>
+            <li>Nama, NIK, nomor HP, dan email diganti kode di server kami. Model AI hanya melihat konten keahlian.</li>
+            <li>Data lewat API komersial tidak dipakai untuk melatih model, sesuai ketentuan penyedia.</li>
+            <li><i>Zero data retention</i> tersedia lewat kontrak enterprise dengan penyedia, bukan bawaan.</li>
+            <li>Data kandidat dihapus otomatis 90 hari setelah proses selesai.</li>
+          </ul>
+        </div>
+        <div class="mcard">
+          <span class="label">Local atau frontier?</span>
+          <h3>Hybrid</h3>
+          <ul>
+            <li><b>Frontier API</b> (Claude dan sejenisnya) untuk membaca CV dan menilai dengan rubrik: kualitas terbaik, tanpa server GPU sendiri.</li>
+            <li>Model frontier belum punya region Indonesia, jadi data keluar negeri. Karena itu ada persetujuan kandidat dan kontrak sesuai UU PDP, dan identitas selalu dibuang lebih dulu.</li>
+            <li><b>Model lokal</b> butuh biaya GPU tetap tiap bulan. Baru masuk akal di volume besar.</li>
+          </ul>
+        </div>
+        <div class="mcard">
+          <span class="label">Berapa biaya AI per kandidat?</span>
+          <h3>Kecil dibanding waktu reviewer</h3>
+          <div class="scroll"><table class="rules-t">
+            <thead><tr><th>Tahap</th><th class="num">Biaya AI</th></tr></thead>
+            <tbody>
+              <tr><td>Triase CV</td><td class="num">±Rp400–800</td></tr>
+              <tr><td>Tes singkat</td><td class="num">±Rp3–5rb</td></tr>
+              <tr><td>Dossier lengkap</td><td class="num">±Rp11rb</td></tr>
+              <tr><td>Review manusia per dossier</td><td class="num">±Rp25–50rb</td></tr>
+            </tbody>
+          </table></div>
+          <p>Estimasi dari harga API Claude per Oktober 2026 dan kurs Rp16.500/USD, belum diukur pada kandidat nyata.</p>
+        </div>
+        <div class="mcard">
+          <span class="label">Sumber mana yang benar-benar bisa dicek?</span>
+          <h3>Otomatis dulu yang paling sulit dipalsukan</h3>
+          <div class="scroll"><table class="rules-t">
+            <thead><tr><th>Sumber</th><th>Cara cek</th></tr></thead>
+            <tbody>
+              <tr><td>Uji live coding</td><td><span class="pill st-ok">Otomatis</span> platform kami</td></tr>
+              <tr><td>Wawancara explain-your-code</td><td><span class="pill st-ok">Semi</span> transkrip + rubrik</td></tr>
+              <tr><td>Ijazah (PDDikti)</td><td><span class="pill st-partial">Manual</span> situs publik PDDikti</td></tr>
+              <tr><td>Masa kerja (BPJS)</td><td><span class="pill st-partial">Manual</span> kandidat menunjukkan aplikasi JMO</td></tr>
+              <tr><td>Referensi</td><td><span class="pill st-partial">Manual</span> email atau nomor kantor</td></tr>
+              <tr><td>Kode publik</td><td><span class="pill st-none">Bobot rendah</span> topik wawancara</td></tr>
+            </tbody>
+          </table></div>
+        </div>
       </div>
     </div>
   </section>
@@ -546,15 +655,15 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
     <div class="wrap">
       <div class="block-head">
         <h2>Pemeriksaan latar belakang yang bisa dibaca kandidat</h2>
-        <p>Agen yang bisa menggali apa saja tentang seseorang adalah liabilitas, bukan fitur. Jejak bekerja hanya dengan sumber yang dibuka kandidat, mengikuti UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi.</p>
+        <p>Pemeriksaan yang bisa menggali apa saja tentang seseorang adalah liabilitas, bukan fitur. Jejak bekerja hanya dengan sumber yang dibuka kandidat, mengikuti UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi.</p>
       </div>
       <div class="rules">
-        <div class="rule"><h3>Izin per sumber</h3><p>Kandidat mencentang setiap sumber satu per satu. Tanpa centang, agen tidak membuka sumber itu.</p></div>
+        <div class="rule"><h3>Izin per sumber</h3><p>Kandidat mencentang setiap sumber satu per satu. Tanpa centang, kami tidak membuka sumber itu.</p></div>
         <div class="rule"><h3>Dossier yang sama</h3><p>Kandidat melihat persis apa yang dilihat perekrut: klaim, bukti, skor, dan alasannya.</p></div>
         <div class="rule"><h3>Hak menyanggah</h3><p>Setiap status "dilebih-lebihkan" bisa disanggah dengan bukti baru sebelum keputusan dibuat.</p></div>
         <div class="rule"><h3>Manusia yang memutuskan</h3><p>Jejak memberi peringkat dan rekomendasi uji. Keputusan menolak atau menerima tetap di tangan perekrut.</p></div>
         <div class="rule"><h3>Masa simpan terbatas</h3><p>Data kandidat yang tidak diterima dihapus setelah 90 hari, kecuali kandidat meminta disimpan untuk lowongan berikutnya.</p></div>
-        <div class="rule"><h3>Jejak audit</h3><p>Setiap sumber yang dibaca agen tercatat dengan waktu dan alasannya, siap diperiksa bila ada keberatan.</p></div>
+        <div class="rule"><h3>Jejak audit</h3><p>Setiap sumber yang kami baca tercatat dengan waktu dan alasannya, siap diperiksa bila ada keberatan.</p></div>
       </div>
       <div class="never">
         <span class="label">Tidak pernah</span>
@@ -571,7 +680,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
     <div class="wrap">
       <div class="copy">
         <h2>Coba pada lowongan berikutnya.</h2>
-        <p>Pilot berjalan pada satu posisi selama satu siklus rekrutmen. Kami bandingkan peringkat CV dengan peringkat bukti, lalu dengan kinerja tiga bulan pertama.</p>
+        <p>Pilot gratis untuk 5 perusahaan pertama: satu lowongan developer, 100 triase CV, 10 tes singkat, dan 3 dossier lengkap. Kami bandingkan peringkat CV dengan peringkat bukti, lalu dengan kinerja tiga bulan pertama.</p>
       </div>
       <form id="pilotForm" novalidate>
         <div class="f2">
@@ -581,10 +690,11 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
         <div class="f2">
           <label for="pPosisi">Posisi untuk pilot
             <select id="pPosisi" name="posisi">
-              <option>Backend / software engineer</option>
-              <option>Staf akuntansi &amp; pajak</option>
-              <option>Supervisor gudang</option>
-              <option>Sales B2B</option>
+              <option>Backend engineer</option>
+              <option>Frontend / mobile engineer</option>
+              <option>Full-stack engineer</option>
+              <option>Data / DevOps</option>
+              <option>Posisi volume tinggi (kasir, staf toko)</option>
               <option>Lainnya</option>
             </select>
           </label>
@@ -606,7 +716,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
 
 <footer class="site">
   <div class="wrap">
-    <span>Jejak · konsep produk. Semua kandidat dan angka di halaman ini adalah contoh.</span>
+    <span>Jejak · jasa screening developer. Demo konsep: semua kandidat dan angka di halaman ini adalah contoh.</span>
     <span>Dari obrolan tim, 14 Oktober 2026</span>
   </div>
 </footer>
@@ -622,7 +732,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
     { id: 'eng', name: 'Bahasa Inggris teknis', w: 1 },
   ];
   const SRC = {
-    U: 'Uji kerja', K: 'Kode publik', R: 'Referensi terstruktur', S: 'Sertifikasi', W: 'Wawancara teknis',
+    U: 'Uji live coding', K: 'Kode publik', R: 'Referensi terverifikasi', S: 'Sertifikasi', W: 'Wawancara explain-your-code',
   };
 
   const CANDS = [
@@ -861,7 +971,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
         <div class="ev"><span class="label">Skor bukti</span><b>${c.es}</b></div>
         <div><span class="label">Selisih</span><b style="color:var(${gap > 15 ? '--over' : gap < 0 ? '--hidden' : '--ink'})">${gap > 0 ? '−' : '+'}${Math.abs(gap)}</b></div>
       </div>
-      <div class="agent"><span class="label">Rekomendasi agen</span>${esc(c.agent)}</div>
+      <div class="agent"><span class="label">Rekomendasi reviewer</span>${esc(c.agent)}</div>
       <div class="focusbox" style="margin-top:14px">${focusHtml}</div>`;
   }
 
@@ -894,11 +1004,12 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
 
   /* signals */
   const SIG = [
-    ['Uji kerja terawasi', 1.0, 'Tugas 30–60 menit dibuat agen sesuai posisi, dijalankan dan dinilai otomatis, lalu dicek manusia.'],
-    ['Kode publik dengan riwayat commit', 0.8, 'Hanya commit milik kandidat yang dihitung. Fork tanpa perubahan dan kode tutorial diabaikan.'],
-    ['Referensi terstruktur', 0.6, 'Atasan menjawab pertanyaan perilaku spesifik, bukan "apakah dia baik". Kontak diberikan kandidat.'],
-    ['Sertifikasi terverifikasi penerbit', 0.5, 'Dicek langsung ke penerbit. Sertifikat dari kursus tanpa ujian terawasi tidak menaikkan level.'],
-    ['Wawancara teknis', 0.5, 'Transkrip dinilai dengan rubrik yang sama untuk semua kandidat.'],
+    ['Uji live coding (boleh pakai AI)', 1.0, 'Memperbaiki bug di codebase asing, proses terekam. Yang dinilai cara memakai AI dan apakah kandidat menangkap jawaban AI yang salah.'],
+    ['Riwayat kerja resmi', 0.9, 'Masa kerja dari catatan BPJS Ketenagakerjaan, ditunjukkan kandidat langsung dari aplikasinya. Pola yang sama dengan Myinfo di Singapura.'],
+    ['Wawancara explain-your-code', 0.7, 'Kandidat menjelaskan solusinya sendiri selama 20 menit. Sulit dipalsukan dengan AI.'],
+    ['Referensi terverifikasi', 0.6, 'Atasan menjawab pertanyaan perilaku spesifik. Identitasnya dicek lewat email atau nomor kantor.'],
+    ['Sertifikasi & ijazah', 0.5, 'Ijazah dicek lewat PDDikti, sertifikat langsung ke penerbit.'],
+    ['Kode publik & portofolio', 0.3, 'Turun dari 0,8. Repo bisa dibuat AI dalam menit, jadi hanya dipakai untuk memilih topik wawancara.', true],
     ['Klaim CV', 0.2, 'Titik awal pencarian. Tidak pernah menaikkan skor bukti sendirian.', true],
   ];
   $('signals').innerHTML = SIG.map(([t, w, d, cv]) => `
@@ -907,7 +1018,7 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 16px; fl
       <p>${d}</p></div>`).join('');
 
   /* matematika */
-  const TRUST = { U: 1.0, G: 0.9, K: 0.8, R: 0.6, S: 0.5, W: 0.5 };
+  const TRUST = { U: 1.0, G: 0.9, W: 0.7, R: 0.6, S: 0.5, K: 0.3 };
   const fmt = (x, d = 1) => x.toLocaleString('id-ID', { minimumFractionDigits: d, maximumFractionDigits: d });
   const mstate = { cand: 'raka', skill: null, off: new Set() };
   function renderWorked() {

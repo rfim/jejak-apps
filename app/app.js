@@ -32,7 +32,7 @@
     activity: store.get('activity', null) || ACTIVITY.slice(),
     liveIdx: store.get('liveIdx', 0),
     audit: store.get('audit', null) || [
-      { t: '09.12', m: 'Agen membaca transkrip wawancara teknis.' },
+      { t: '09.12', m: 'Reviewer membaca transkrip wawancara teknis.' },
       { t: '08.40', m: 'Riwayat kerja resmi dibagikan lewat ID digital.' },
       { t: 'Kmrn', m: 'Kandidat membuka akses ke 1 repositori publik.' },
     ],
@@ -401,7 +401,7 @@
         if (status(c.claim[s.id], evLevel(c, s.id))[0] === 'hidden') list.push({ c, h: 'Keahlian tersembunyi', p: `${first(c)} terbukti di ${s.name.toLowerCase()}, padahal tidak ditulis di CV.`, tone: 'st-hidden' });
       });
       if (enabled(c, 'G') && c.years.cv - c.years.verified >= 1) list.push({ c, h: 'Masa kerja tidak cocok', p: `CV: ${fmtYears(c.years.cv)} tahun. Catatan resmi: ${fmtYears(c.years.verified)} tahun.`, tone: 'st-over' });
-      if (c.cvAi.adMatch >= 85) list.push({ c, h: 'CV disetel ke iklan lowongan', p: `${c.cvAi.adMatch}% kalimat CV ${first(c)} mirip iklan. Agen memeriksa lebih ketat.`, tone: 'st-partial' });
+      if (c.cvAi.adMatch >= 85) list.push({ c, h: 'CV disetel ke iklan lowongan', p: `${c.cvAi.adMatch}% kalimat CV ${first(c)} mirip iklan. Kami memeriksa lebih ketat.`, tone: 'st-partial' });
       if (SKILLS.some(s => c.claim[s.id] > 0 && evLevel(c, s.id) === 0)) list.push({ c, h: 'Perlu uji kerja', p: `${first(c)} punya klaim tanpa bukti sama sekali.`, tone: 'st-none' });
     });
     return list;
@@ -416,7 +416,7 @@
     el.innerHTML = `
       <div class="duel-hero">
         <span class="label">AI vs AI · minggu ini</span>
-        <h2><span>AI mereka</span> menulis ${claimsTotal} klaim. <b>AI kami</b> memeriksa semuanya.</h2>
+        <h2><span>AI mereka</span> menulis ${claimsTotal} klaim. <b>Kami</b> memeriksa semuanya.</h2>
         <div class="duel-stats">
           <div class="r"><b data-count="${claimsTotal}">0</b><span class="label">klaim CV</span></div>
           <span class="vs">vs</span>
@@ -429,7 +429,7 @@
         <button type="button" class="tile" style="--i:2" data-go="jadwal"><span class="label">Wawancara</span><b data-count="${upcoming.length}">0</b><small>terjadwal ke depan</small></button>
         <button type="button" class="tile alert" style="--i:3" data-go="bukti"><span class="label">Dilebih-lebihkan</span><b data-count="${act.reduce((a, c) => a + SKILLS.filter(s => status(c.claim[s.id], evLevel(c, s.id))[0] === 'over').length, 0)}">0</b><small>klaim di semua CV</small></button>
       </div>
-      <div class="section-title"><h3>Sorotan agen</h3><span class="label">${ins.length} temuan</span></div>
+      <div class="section-title"><h3>Temuan</h3><span class="label">${ins.length} temuan</span></div>
       <div class="carousel" id="carousel">${ins.map((x, i) => `
         <button type="button" class="insight" data-go="kandidat/${x.c.id}" style="--i:${i}">
           <span class="top">${avatar(x.c, 'sm')}<span class="pill ${x.tone}">${esc(x.h)}</span></span>
@@ -438,9 +438,9 @@
       <div class="dots" id="dots">${ins.map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('')}</div>
       ${upcoming.length ? `<div class="section-title"><h3>Berikutnya</h3><a class="link" href="#jadwal">Semua</a></div>
         <ul class="list">${upcoming.slice(0, 2).map(ivRow).join('')}</ul>` : ''}
-      <div class="section-title"><h3>Aktivitas agen</h3>
+      <div class="section-title"><h3>Aktivitas verifikasi</h3>
         <button type="button" class="refresh-btn" id="refreshBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>Pindai</button></div>
-      <div class="card"><span class="live"><i></i>Agen aktif · tarik layar ke bawah untuk memindai</span>
+      <div class="card"><span class="live"><i></i>Verifikasi berjalan · tarik layar ke bawah untuk memeriksa</span>
         <ul class="timeline" id="timeline">${S.activity.slice(0, 6).map(a => `<li><time>${esc(a.t)}</time><span class="src">${a.k}</span><span class="m">${esc(a.m)}</span></li>`).join('')}</ul>
       </div>`;
     countAll(el);
@@ -482,7 +482,7 @@
       if (btn) btn.classList.remove('busy');
       endPtr();
       scanning = false;
-      toast('Agen menemukan 1 bukti baru');
+      toast('1 bukti baru masuk');
       buzz([8, 30, 8]);
     }, 1300);
   }
@@ -511,7 +511,7 @@
     if (ptrDy * .55 > 60) {
       ptr.classList.add('loading');
       ptr.style.transform = 'translate(-50%, -10px)';
-      ptr.querySelector('.ptr-text').textContent = 'Agen memindai sumber…';
+      ptr.querySelector('.ptr-text').textContent = 'Memeriksa sumber…';
       scan();
     } else endPtr();
   });
@@ -531,8 +531,8 @@
     $('modeSeg').dataset.mode = S.mode;
     $$('#modeSeg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode)));
     $('rankHint').innerHTML = S.mode === 'es'
-      ? 'Diurutkan oleh <b>AI Jejak</b> dari bukti. Panah: perubahan dari versi CV.'
-      : 'Diurutkan dari klaim yang ditulis <b>AI kandidat</b> di CV, seperti filter kata kunci biasa.';
+      ? 'Diurutkan dari <b>bukti</b>. Panah: perubahan dari versi CV.'
+      : 'Diurutkan dari <b>klaim di CV</b>, seperti filter kata kunci biasa.';
     renderCards();
   }
   function visibleCands() {
@@ -713,9 +713,9 @@
       <div class="card duel">
         <span class="label">AI vs AI</span>
         <div class="duel-row">
-          <div class="side r"><span class="label">AI kandidat</span><b data-count="${cv}">0</b><small class="hint">skor dari CV</small></div>
+          <div class="side r"><span class="label">Klaim CV</span><b data-count="${cv}">0</b><small class="hint">skor dari CV</small></div>
           <span class="vs">vs</span>
-          <div class="side j"><span class="label">AI Jejak</span><b data-count="${es}">0</b><small class="hint">skor dari bukti</small></div>
+          <div class="side j"><span class="label">Bukti</span><b data-count="${es}">0</b><small class="hint">skor dari bukti</small></div>
         </div>
         <div class="rope" aria-hidden="true"><i id="rope"></i></div>
         <p class="hint"><b>${caughtN}</b> dari ${claimN} klaim CV tidak bisa dibuktikan.</p>
@@ -725,7 +725,7 @@
           <p class="hint">Sinyal ini tidak menurunkan skor. CV yang ditulis dengan AI boleh; yang dihitung hanya klaim yang terbukti.</p>
         </div>
       </div>
-      <div class="agent"><span class="label">Rekomendasi AI Jejak</span><span id="agentText"></span></div>
+      <div class="agent"><span class="label">Rekomendasi reviewer</span><span id="agentText"></span></div>
       <div class="card years">
         <div class="section-title" style="margin:0"><span class="label">Masa kerja</span>
           ${gShared ? `<span class="pill ${c.years.cv - c.years.verified >= 1 ? 'st-over' : 'st-ok'}">${c.years.cv - c.years.verified >= 1 ? 'Tidak cocok' : 'Cocok'}</span>` : '<span class="pill st-none">Tidak dibagikan</span>'}</div>
@@ -737,7 +737,7 @@
       </div>
       <div class="card">
         ${graphSvg(c)}
-        <div class="legend"><span class="key"><span class="sw-c"></span>Klaim AI kandidat</span><span class="key"><span class="sw-e"></span>Terbukti oleh AI Jejak</span><span>Ketuk keahlian</span></div>
+        <div class="legend"><span class="key"><span class="sw-c"></span>Klaim CV</span><span class="key"><span class="sw-e"></span>Terbukti</span><span>Ketuk keahlian</span></div>
       </div>
       <div class="section-title"><h3>Buku klaim</h3><span class="label">${SKILLS.length} keahlian</span></div>
       <ul class="list stagger">${SKILLS.map((s, i) => {
@@ -793,15 +793,15 @@
     openSheet(s.name, `
       <div class="card" style="display:grid;grid-template-columns:auto 1fr;gap:8px 14px;align-items:center">
         <span class="label">Status</span><span><span class="pill st-${st}">${lbl}</span></span>
-        <span class="label">AI kandidat</span>${cl ? pips(cl, 'c') : '<span class="hint">tidak ditulis</span>'}
-        <span class="label">AI Jejak</span>${pips(e, 'e')}
+        <span class="label">Klaim CV</span>${cl ? pips(cl, 'c') : '<span class="hint">tidak ditulis</span>'}
+        <span class="label">Terbukti</span>${pips(e, 'e')}
       </div>
       ${items.length ? `<ul class="list stagger">${items.map((x, i) => `<li style="--i:${i}">${evItem(x)}</li>`).join('')}</ul>` : '<p class="empty">Belum ada bukti untuk keahlian ini.</p>'}`);
   }
   function openSendTest(c) {
     openSheet('Kirim uji kerja', `
       <div class="card" style="display:grid;gap:6px">
-        <span class="label">Dibuat oleh AI Jejak untuk ${esc(ROLE)}</span>
+        <span class="label">Disusun untuk ${esc(ROLE)} · boleh pakai AI</span>
         <b style="font-size:17px">Potong stok bersamaan</b>
         <p class="hint">Perbaiki endpoint yang memotong stok agar aman saat 50 request datang bersamaan. Tulis test yang membuktikannya.</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><span class="pill st-hidden">45 menit</span><span class="pill st-partial">Batas 48 jam</span><span class="pill st-ok">Dinilai otomatis</span></div>
@@ -994,7 +994,7 @@
           <span><b>Masuk dengan biometrik</b><small id="bioNote">Face ID atau sidik jari di perangkat ini</small></span>
           <button type="button" class="switch" role="switch" id="bioSw" aria-checked="${bioOn}" aria-label="Masuk dengan biometrik"></button></li>
         <li class="set"><span class="ic g">${icon('<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/>')}</span>
-          <span><b>Notifikasi</b><small>Uji kerja selesai, wawancara, temuan agen</small></span>
+          <span><b>Notifikasi</b><small>Uji kerja selesai, wawancara, temuan baru</small></span>
           <button type="button" class="switch" role="switch" id="notifSw" aria-checked="${notifOn}" aria-label="Notifikasi"></button></li>
       </ul>
       <div class="section-title"><span class="label">Tampilan</span></div>
@@ -1014,10 +1014,10 @@
         <span class="label">Kepatuhan</span>
         <p><b>Indonesia:</b> UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi.</p>
         <p><b>Singapura:</b> Personal Data Protection Act 2012 (PDPA) dan Tripartite Guidelines on Fair Employment Practices: penilaian berdasarkan kemampuan, bukan usia, ras, agama atau jenis kelamin.</p>
-        <p>Keputusan akhir selalu oleh manusia. AI Jejak hanya membaca sumber yang diizinkan kandidat.</p>
+        <p>Keputusan akhir selalu oleh manusia. AI hanya alat bantu; setiap hasil dicek reviewer, dan kami hanya membaca sumber yang diizinkan kandidat.</p>
       </div>
       <button type="button" class="btn ghost" id="logoutBtn">Keluar</button>
-      <p class="hint center">Jejak demo · semua kandidat dan angka adalah contoh</p>`;
+      <p class="hint center">Demo konsep · kandidat dan angka adalah contoh; penilaian belum dijalankan AI</p>`;
     $$('[data-go]', el).forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
     $$('[data-theme-pick]', el).forEach(b => b.addEventListener('click', () => setTheme(b.dataset.themePick)));
     $('logoutBtn').addEventListener('click', logout);
@@ -1035,7 +1035,7 @@
       if (sw.getAttribute('aria-checked') === 'true') { store.set('notif', false); sw.setAttribute('aria-checked', 'false'); return; }
       if (!('Notification' in window)) return toast('Browser ini tidak mendukung notifikasi');
       const p = await Notification.requestPermission();
-      if (p === 'granted') { store.set('notif', true); sw.setAttribute('aria-checked', 'true'); notify('Notifikasi aktif', 'AI Jejak akan memberi tahu saat ada bukti baru.'); }
+      if (p === 'granted') { store.set('notif', true); sw.setAttribute('aria-checked', 'true'); notify('Notifikasi aktif', 'Jejak akan memberi tahu saat ada bukti baru.'); }
       else toast('Izin notifikasi ditolak di pengaturan browser');
     });
   }
@@ -1089,12 +1089,12 @@
     const challengeable = SKILLS.filter(s => ['over', 'none', 'partial'].includes(status(c.claim[s.id], evLevel(c, s.id))[0]));
     page.innerHTML = `
       <div class="chips">${CANDS.map(x => `<button type="button" class="chip" data-c="${x.id}" aria-pressed="${x.id === c.id}">${esc(first(x))}</button>`).join('')}</div>
-      <p class="hint">Ini tampilan yang dilihat <b>${esc(c.name)}</b> di ponselnya. Matikan sumber, dan AI Jejak langsung menghitung ulang tanpa sumber itu.</p>
+      <p class="hint">Ini tampilan yang dilihat <b>${esc(c.name)}</b> di ponselnya. Matikan sumber, dan skor bukti langsung dihitung ulang tanpa sumber itu.</p>
       <div class="card consent-score">
         <span class="label">Skor bukti saat ini</span><span class="was">${es !== base ? `dengan semua sumber: ${base}` : 'semua sumber aktif'}</span>
         <b data-count="${es}">0</b><span></span>
       </div>
-      <div class="section-title"><span class="label">Sumber yang boleh dibaca AI Jejak</span></div>
+      <div class="section-title"><span class="label">Sumber yang boleh kami baca</span></div>
       <ul class="list">${Object.entries(SRC).map(([k, v]) => {
         const has = used.includes(k), on = has && enabled(c, k);
         return `<li class="src-row"><span class="t">${esc(v.name)} <span class="tr">· bobot ${v.trust.toFixed(1)}</span></span>

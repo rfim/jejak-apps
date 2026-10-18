@@ -2,9 +2,16 @@
 
 Live site: https://rfim.github.io/jejak-apps/
 
-**Jejak** is a product concept for skill intelligence in hiring, branded **AI vs AI**: candidates' AI writes the CV, Jejak's AI checks it. An agent breaks a CV into claims, collects evidence the candidate has agreed to share (work samples, public code, structured references, verified certificates), tests the claims that have no evidence yet, and ranks candidates by what they can show rather than what they wrote.
+**Jejak** is a developer screening service, branded **AI vs AI**: candidates' AI writes the CV, we check it. We sell the outcome (a verified shortlist), not "AI": AI is an internal tool and a reviewer checks every result.
 
-The site is a single static `index.html` with no build step. All candidates and numbers on it are examples.
+How it works, as a three-stage funnel so only the shortlist gets the expensive check:
+1. **CV triage** for every applicant.
+2. **20-minute short test** for the top 20%.
+3. **Full dossier** for the shortlist: live coding in an unfamiliar codebase (AI allowed; we assess how it is used), an explain-your-code interview, and employment/degree checks with the candidate's consent.
+
+Evidence weights favour process you can watch and third-party records. Public code and portfolios are weighted low (0.3) because AI can generate them in minutes.
+
+The site is a single static `index.html` with no build step. It includes the scoring maths, pricing, and a Data & AI section (data protection, AI cost per candidate, which sources can really be checked). This is a concept demo: all candidates and numbers are examples, and no AI runs in it yet.
 
 ## Mobile app
 

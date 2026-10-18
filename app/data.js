@@ -9,13 +9,15 @@ window.JEJAK = (() => {
     { id: 'eng', name: 'Bahasa Inggris teknis', w: 1 },
   ];
 
+  // Trust weights: process you can watch or records issued by a third party rank highest.
+  // Public code ranks low: in the AI era a repo can be generated in minutes.
   const SRC = {
-    U: { name: 'Uji kerja', trust: 1.0, reads: 'Hasil uji 45 menit yang kamu kerjakan di Jejak.' },
+    U: { name: 'Uji live coding', trust: 1.0, reads: 'Sesi uji live di Jejak. Boleh pakai AI; prosesnya terekam.' },
     G: { name: 'Riwayat kerja resmi', trust: 0.9, reads: 'Masa kerja dari catatan iuran resmi (BPJS Ketenagakerjaan), dibagikan lewat ID digital seperti pola Myinfo di Singapura.' },
-    K: { name: 'Kode publik', trust: 0.8, reads: 'Repositori yang kamu pilih, hanya commit milikmu.' },
-    R: { name: 'Referensi terstruktur', trust: 0.6, reads: 'Jawaban atasan yang kontaknya kamu berikan.' },
-    S: { name: 'Sertifikasi', trust: 0.5, reads: 'Status sertifikat, dicek langsung ke penerbit.' },
-    W: { name: 'Wawancara teknis', trust: 0.5, reads: 'Transkrip wawancara dan nilai rubrik.' },
+    W: { name: 'Wawancara explain-your-code', trust: 0.7, reads: 'Transkrip saat kamu menjelaskan solusimu, dinilai dengan rubrik.' },
+    R: { name: 'Referensi terverifikasi', trust: 0.6, reads: 'Jawaban atasan yang kontaknya kamu berikan; identitasnya kami cek.' },
+    S: { name: 'Sertifikasi & ijazah', trust: 0.5, reads: 'Ijazah lewat PDDikti, sertifikat lewat penerbit.' },
+    K: { name: 'Kode publik', trust: 0.3, reads: 'Repositori yang kamu pilih. Bobot rendah: repo bisa dibuat AI dalam menit.' },
   };
 
   const STAGES = [
@@ -26,7 +28,7 @@ window.JEJAK = (() => {
   ];
 
   // cvAi: signals that the CV was tuned to the job ad (by a person or by an AI writer).
-  // They never lower a score; they tell the agent how hard to check.
+  // They never lower a score; they tell reviewers how hard to check.
   const CANDS = [
     {
       id: 'raka', name: 'Raka Pratama', hue: 18, stage: 'uji', applied: '3 hari lalu',
@@ -91,7 +93,7 @@ window.JEJAK = (() => {
   const NOTIFS = [
     { id: 'n1', t: '2 jam lalu', m: 'Sinta menyelesaikan uji kerja. Lolos, termasuk kasus bersamaan.', go: 'kandidat/sinta' },
     { id: 'n2', t: '5 jam lalu', m: 'Masa kerja Raka terverifikasi: 3,5 tahun, bukan 6 tahun seperti di CV.', go: 'kandidat/raka' },
-    { id: 'n3', t: 'Kemarin', m: 'Ayu belum punya bukti konkurensi. Agen menyarankan uji kerja.', go: 'kandidat/ayu' },
+    { id: 'n3', t: 'Kemarin', m: 'Ayu belum punya bukti konkurensi. Reviewer menyarankan uji kerja.', go: 'kandidat/ayu' },
   ];
 
   const ACTIVITY = [
@@ -100,7 +102,7 @@ window.JEJAK = (() => {
     { t: '08.05', m: 'Memeriksa 3 repo Raka: 2 fork tutorial tanpa commit asli.', k: 'K' },
     { t: 'Kmrn', m: 'Membuat uji kerja "potong stok bersamaan" untuk 4 pelamar.', k: 'U' },
   ];
-  // Events the agent "finds" when the recruiter pulls to refresh.
+  // Events that arrive when the recruiter pulls to refresh.
   const LIVE = [
     { m: 'Menghubungi penerbit sertifikat Ayu: terverifikasi, ujian terawasi.', k: 'S' },
     { m: 'Menemukan 41 kalimat CV Raka yang identik dengan iklan lowongan.', k: 'K' },
